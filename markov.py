@@ -79,7 +79,10 @@ def make_text(chains, n):
     while n_gram in chains:
         next_word = choice(chains[n_gram])
         words.append(next_word)
-        n_gram = tuple(n_gram[-(n-1):]) + (next_word,)
+        if next_word[-1] not in string.punctuation:
+            n_gram = tuple(n_gram[-(n-1):]) + (next_word,)
+        else:
+            break
         # print(n_gram)
         # print(next_word)
     # your code goes here

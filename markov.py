@@ -66,17 +66,19 @@ def make_chains(text_string, n):
     return chains
 
 
-def make_text(chains):
+def make_text(chains, n):
     """Return text from chains."""
 
-    bigram = choice(list(chains.keys()))
-    words = [bigram[0], bigram[1]]
+    n_gram = choice(list(chains.keys()))
+    words = list(n_gram)
+    print(words)
 
-    while bigram in chains:
-        next_word = choice(chains[bigram])
+    while n_gram in chains:
+        next_word = choice(chains[n_gram])
         words.append(next_word)
-        bigram = (bigram[-1], next_word)
-
+        n_gram = tuple(n_gram[-(n-1):]) + (next_word,)
+        print(n_gram)
+        print(next_word)
     # your code goes here
 
     return " ".join(words)
@@ -91,6 +93,6 @@ input_text = open_and_read_file(input_path)
 chains = make_chains(input_text, 3)
 
 # Produce random text
-random_text = make_text(chains)
+random_text = make_text(chains, 3)
 
 print(random_text)

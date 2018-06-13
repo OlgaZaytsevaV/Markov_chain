@@ -3,6 +3,7 @@
 from random import choice
 
 import sys
+import string
 
 
 def open_and_read_file(file_path):
@@ -61,7 +62,7 @@ def make_chains(text_string, n):
 
     # your code goes here
 
-#    print(chains)
+    #print(chains)
 
     return chains
 
@@ -69,7 +70,9 @@ def make_chains(text_string, n):
 def make_text(chains, n):
     """Return text from chains."""
 
-    n_gram = choice(list(chains.keys()))
+    tpl_upper = [tpl for tpl in chains.keys() if tpl[0][0] in string.ascii_uppercase]
+
+    n_gram = choice(tpl_upper)
     words = list(n_gram)
     # print(words)
 

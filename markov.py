@@ -42,8 +42,10 @@ def make_chains(text_string):
         [None]
     """
 
-    text_lst = text_string.rstrip().split(" ")
+    text_lst = text_string.split()
     
+
+
     chains = {}
     for i in range(len(text_lst)-2): 
         tup_key = (text_lst[i], text_lst[i+1])
@@ -51,27 +53,27 @@ def make_chains(text_string):
         if tup_key in chains:
             chains[tup_key].append(val)
         elif tup_key not in chains:
-            chains[tup_key] = []  
-            chains[tup_key].append(val)
+            chains[tup_key] = [val]  
+           
 
 
     # your code goes here
 
-    print(chains)
+    # print(chains)
 
     return chains
 
 
 def make_text(chains):
     """Return text from chains."""
-    first_key = random.choice(chains.keys())
-    print(first_key)
 
-    next_word = random.choice(chains[first_key]) 
-    next_key = (first_key[1], next_word)
-    our_string = first_key" " + " " next_word
+    bigram = choice(list(chains.keys()))
+    words = [bigram[0], bigram[1]]
 
-    words = []
+    while bigram in chains:
+        next_word = choice(chains[bigram])
+        words.append(next_word)
+        bigram = (bigram[-1], next_word)
 
     # your code goes here
 

@@ -61,7 +61,7 @@ def make_chains(text_string, n):
 
     # your code goes here
 
-    print(chains)
+#    print(chains)
 
     return chains
 
@@ -71,28 +71,29 @@ def make_text(chains, n):
 
     n_gram = choice(list(chains.keys()))
     words = list(n_gram)
-    print(words)
+    # print(words)
 
     while n_gram in chains:
         next_word = choice(chains[n_gram])
         words.append(next_word)
         n_gram = tuple(n_gram[-(n-1):]) + (next_word,)
-        print(n_gram)
-        print(next_word)
+        # print(n_gram)
+        # print(next_word)
     # your code goes here
 
     return " ".join(words)
 
 
 input_path = sys.argv[1]
+input_ngram = int(sys.argv[2])
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains = make_chains(input_text, 3)
+chains = make_chains(input_text, input_ngram)
 
 # Produce random text
-random_text = make_text(chains, 3)
+random_text = make_text(chains, input_ngram)
 
 print(random_text)
